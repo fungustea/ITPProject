@@ -1,0 +1,28 @@
+myBundle\ictBundle\Entity\scholarship:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        schoName:
+            type: text
+            column: scho_name
+        schoDetail:
+            type: text
+            column: scho_detail
+        closingDate:
+            type: text
+            column: closing_date
+        state:
+            type: text
+        contact:
+            type: text
+        url:
+            type: text
+        popular:
+            type: integer
+    lifecycleCallbacks: {  }

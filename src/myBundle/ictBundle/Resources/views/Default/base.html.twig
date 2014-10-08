@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+					
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{% block title %}ICT Careers{% endblock %}</title>
+		 {% block stylesheets %}
+           
+		<link href="{{ asset('src/myBundle/ictBundle/Resources/views/Default/css/local.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('src/myBundle/ictBundle/Resources/views/Default/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('src/myBundle/ictBundle/Resources/views/Default/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+
+		<link href="{{ asset('http://www.shieldui.com/shared/components/latest/css/shieldui-all.min.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css') }}" rel="stylesheet" type="text/css" />
+
+		 {% endblock %}
+		 <link href="{{ asset('views/Default/css/local.css') }}" rel="stylesheet" type="text/css" />
+		 <link href="{{ asset('views/Default/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+		 <link href="{{ asset('views/Default/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+		 {% stylesheets 
+    		'@myBundle/ictBundle/Resources/views/Default/css/local.css'
+    		'@myBundle/ictBundle/Resources/views/Default/bootstrap/css/bootstrap.min.css' 
+    		'@myBundle/ictBundle/Resources/views/Default/font-awesome/css/font-awesome.min.css' 
+    		'http://www.shieldui.com/shared/components/latest/css/shieldui-all.min.css' 
+    		'http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css' 
+		%}
+    		<link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+		{% endstylesheets %}
+		
+	    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+	    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+	    <link rel="stylesheet" type="text/css" href="css/local.css" />
+	
+	    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+	    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
+		
+	    <!-- you need to include the shieldui css and js assets in order for the charts to work -->
+	    <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/shieldui-all.min.css" />
+	    <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css" />
+
+	    <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+	    <script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/gridData.js"></script>
+
+	</head>
+	<body>
+	 	{% block body %}{% endblock %}
+	 	{% block javascripts %}
+	 	<script src="{{ asset('myBundle/ictBundle/Resource/iews/Default/js/jquery-1.10.2.min.js') }}"></script>
+	 	<script src="{{ asset('myBundle/ictBundle/Resource/iews/Default/bootstrap/js/bootstrap.min.js') }}"></script>
+	 	<script src="{{ asset('http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js') }}"></script>
+	 	<script src="{{ asset('http://www.prepbootstrap.com/Content/js/gridData.js') }}"></script>
+	 	{% endblock %}
+	</body>
+</html>

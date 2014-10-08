@@ -1,0 +1,4 @@
+my_bundleict:
+    resource: "@myBundleictBundle/Resources/config/routing.yml"
+    prefix:   /
+

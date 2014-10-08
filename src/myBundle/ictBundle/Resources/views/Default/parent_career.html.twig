@@ -1,0 +1,31 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Careers</h1>
+                    {% for entity in entities %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">{{ entity.groupname }}</div>
+                        <div class="panel-body">
+                          <b>Jobs:</b>&nbsp; {{ entity.jobs }}
+                      <BR><b>Skill&Interests:</b>&nbsp; {{ entity.skillInterests }}
+                      <BR><b>profile:</b>&nbsp;<a href="{{ entity.profile }}">More opinion</a>
+                      <BR><b><a href="{{ path('career_count', { 'id': entity.id }) }}">Click for like this topic: </a></b>There are {{ entity.popular }} people like this.
+                        </div>
+                        <div class="panel-heading">
+                            <a href="{{ entity.url }}"></i>More Detail:{{ entity.url }}</a>
+                        </div>
+                    </div>
+                    {% endfor %}     						
+                    <div class="alert alert-success alert-dismissable">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+

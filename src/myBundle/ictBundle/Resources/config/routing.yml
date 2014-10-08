@@ -1,0 +1,38 @@
+my_bundleict_scholarship:
+    resource: "@myBundleictBundle/Resources/config/routing/scholarship.yml"
+    prefix:   /scholarship
+
+my_bundleict_activity:
+    resource: "@myBundleictBundle/Resources/config/routing/activity.yml"
+    prefix:   /activity
+
+my_bundleict_teacher:
+    resource: "@myBundleictBundle/Resources/config/routing/teacher.yml"
+    prefix:   /teacher
+
+my_bundleict_career:
+    resource: "@myBundleictBundle/Resources/config/routing/career.yml"
+    prefix:   /career
+
+hello:
+    path:     /hello
+    defaults: { _controller: "myBundleictBundle:Content:hello" }
+welcome:
+    path:     /
+    defaults: { _controller: "myBundleictBundle:welcome:welcome" }
+    
+career_main:
+    path:     /career_main
+    defaults: { _controller: "myBundleictBundle:career:main" }
+
+activity_main:
+    path:     /activity_main
+    defaults: { _controller: "myBundleictBundle:activity:main" }
+
+scholarship_main:
+    path:     /scholarship_main
+    defaults: { _controller: "myBundleictBundle:scholarship:main" }   
+    
+teacher_skill_main:
+    path:     /teacher_skill_main
+    defaults: { _controller: "myBundleictBundle:teacher:main" }  

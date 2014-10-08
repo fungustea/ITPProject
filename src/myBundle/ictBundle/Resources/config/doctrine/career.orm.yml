@@ -1,0 +1,24 @@
+myBundle\ictBundle\Entity\career:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        groupname:
+            type: text
+        jobs:
+            type: text
+        skillInterests:
+            type: text
+            column: skill_interests
+        profile:
+            type: text
+        url:
+            type: text
+        popular:
+            type: integer
+    lifecycleCallbacks: {  }

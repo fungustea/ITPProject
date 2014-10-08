@@ -1,0 +1,33 @@
+teacher:
+    path:     /
+    defaults: { _controller: "myBundleictBundle:teacher:index" }
+
+teacher_show:
+    path:     /{id}/show
+    defaults: { _controller: "myBundleictBundle:teacher:show" }
+
+teacher_new:
+    path:     /new
+    defaults: { _controller: "myBundleictBundle:teacher:new" }
+
+teacher_create:
+    path:     /create
+    defaults: { _controller: "myBundleictBundle:teacher:create" }
+    requirements: { _method: post }
+
+teacher_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "myBundleictBundle:teacher:edit" }
+
+teacher_update:
+    path:     /{id}/update
+    defaults: { _controller: "myBundleictBundle:teacher:update" }
+    requirements: { _method: post|put }
+
+teacher_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "myBundleictBundle:teacher:delete" }
+    requirements: { _method: post|delete }
+teacher_count:
+    path:     /{id}/count
+    defaults: { _controller: "myBundleictBundle:teacher:count" }    

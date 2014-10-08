@@ -1,0 +1,19 @@
+myBundle\ictBundle\Entity\teacher:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        topic:
+            type: text
+        detail:
+            type: text
+        url:
+            type: text
+        popular:
+            type: integer
+    lifecycleCallbacks: {  }

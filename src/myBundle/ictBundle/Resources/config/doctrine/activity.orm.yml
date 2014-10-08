@@ -1,0 +1,31 @@
+myBundle\ictBundle\Entity\activity:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        programname:
+            type: text
+        programdetail:
+            type: text
+        contact:
+            type: text
+        duration:
+            type: text
+        agegroup:
+            type: text
+        gender:
+            type: text
+        location:
+            type: text
+        eventdates:
+            type: text
+        url:
+            type: text
+        popular:
+            type: integer
+    lifecycleCallbacks: {  }

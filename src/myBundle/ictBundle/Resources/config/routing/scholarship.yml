@@ -1,0 +1,34 @@
+scholarship:
+    path:     /
+    defaults: { _controller: "myBundleictBundle:scholarship:index" }
+
+scholarship_show:
+    path:     /{id}/show
+    defaults: { _controller: "myBundleictBundle:scholarship:show" }
+
+scholarship_new:
+    path:     /new
+    defaults: { _controller: "myBundleictBundle:scholarship:new" }
+
+scholarship_create:
+    path:     /create
+    defaults: { _controller: "myBundleictBundle:scholarship:create" }
+    requirements: { _method: post }
+
+scholarship_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "myBundleictBundle:scholarship:edit" }
+
+scholarship_update:
+    path:     /{id}/update
+    defaults: { _controller: "myBundleictBundle:scholarship:update" }
+    requirements: { _method: post|put }
+
+scholarship_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "myBundleictBundle:scholarship:delete" }
+    requirements: { _method: post|delete }
+
+scholarship_count:
+    path:     /{id}/count
+    defaults: { _controller: "myBundleictBundle:scholarship:count" }    

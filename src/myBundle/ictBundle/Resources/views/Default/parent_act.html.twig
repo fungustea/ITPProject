@@ -1,0 +1,31 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Activity</h1>
+                    {% for entity in entities %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">{{ entity.programname }}</div>
+                        <div class="panel-body">
+                          <b>Detail:</b>&nbsp; {{ entity.programdetail }}
+                      <BR><b>Contact:</b>&nbsp; {{ entity.contact }}
+                      <BR><b>Duration:</b>&nbsp; {{ entity.duration }}
+                      <BR><b>Age Group:</b>&nbsp; {{ entity.agegroup }}
+                      <BR><b>Gender:</b>&nbsp; {{ entity.gender }}
+                      <BR><b>Location:</b>&nbsp; {{ entity.location }}
+                      <BR><b>Event Dates:</b>&nbsp; {{ entity.eventdates }}  
+                      <BR><b><a href="{{ path('activity_count', { 'id': entity.id }) }}">Click for like this topic: </a></b>There are {{ entity.popular }} people like this.                 
+                        </div>
+                        <div class="panel-heading">
+                            <a href="{{ entity.url }}"></i>More Detail:{{ entity.url }}</a>
+                        </div>                   
+                    </div>
+       				 {% endfor %}		
+                    <div class="alert alert-success alert-dismissable">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>scholarship list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Schoname</th>
+                <th>Schodetail</th>
+                <th>Closingdate</th>
+                <th>State</th>
+                <th>Contact</th>
+                <th>Url</th>
+                <th>Popular</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('scholarship_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.schoName }}</td>
+                <td>{{ entity.schoDetail }}</td>
+                <td>{{ entity.closingDate }}</td>
+                <td>{{ entity.state }}</td>
+                <td>{{ entity.contact }}</td>
+                <td>{{ entity.url }}</td>
+                <td>{{ entity.popular }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('scholarship_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('scholarship_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('scholarship_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

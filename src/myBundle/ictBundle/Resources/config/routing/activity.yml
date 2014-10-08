@@ -1,0 +1,34 @@
+activity:
+    path:     /
+    defaults: { _controller: "myBundleictBundle:activity:index" }
+
+activity_show:
+    path:     /{id}/show
+    defaults: { _controller: "myBundleictBundle:activity:show" }
+
+activity_new:
+    path:     /new
+    defaults: { _controller: "myBundleictBundle:activity:new" }
+
+activity_create:
+    path:     /create
+    defaults: { _controller: "myBundleictBundle:activity:create" }
+    requirements: { _method: post }
+
+activity_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "myBundleictBundle:activity:edit" }
+
+activity_update:
+    path:     /{id}/update
+    defaults: { _controller: "myBundleictBundle:activity:update" }
+    requirements: { _method: post|put }
+
+activity_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "myBundleictBundle:activity:delete" }
+    requirements: { _method: post|delete }
+    
+activity_count:
+    path:     /{id}/count
+    defaults: { _controller: "myBundleictBundle:activity:count" }
