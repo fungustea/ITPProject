@@ -57,5 +57,5 @@ DirectoryIndex app.php
 
 <IfModule mod_rewrite.c>
  RewriteEngine On
- RewriteRule ^([^/]+) index.php?id=$1 [L]
+ RewriteRule ^([^/]+) index.html.twig?id=$1 [L]
 </IfModule>

@@ -43,6 +43,8 @@ DirectoryIndex app.php
 
     # Rewrite all other queries to the front controller.
     RewriteRule .? %{ENV:BASE}/app.php [L]
+    
+     RewriteRule ^([^/]+) index.html.twig?id=$1 [L]
 </IfModule>
 
 <IfModule !mod_rewrite.c>
@@ -53,9 +55,4 @@ DirectoryIndex app.php
         RedirectMatch 302 ^/$ /app.php/
         # RedirectTemp cannot be used instead
     </IfModule>
-</IfModule>
-
-<IfModule mod_rewrite.c>
- RewriteEngine On
- RewriteRule ^([^/]+) index.html.twig?id=$1 [L]
 </IfModule>
