@@ -1,6 +1,6 @@
 welcome:
     path:     /
-    defaults: { _controller: "myBundleictBundle:Welcome:welcome" }
+    defaults: { _controller: "myBundleictBundle:welcome:welcome" }
     
 hello:
     path:     /hello
