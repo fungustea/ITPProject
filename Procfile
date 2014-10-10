@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-hhvm-nginx
+web: bin/heroku-php-apache2 web/
