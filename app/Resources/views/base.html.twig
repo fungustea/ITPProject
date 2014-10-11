@@ -6,12 +6,8 @@
          {% block stylesheets %}     
            {% stylesheets
            '@myBundleictBundle/Resources/views/Default/bootstrap/css/bootstrap.min.css' 
-           '@myBundleictBundle/Resources/views/Default/font-awesome/css/font-awesome.min.css'
-           '@myBundleictBundle/Resources/views/Default/css/local.css'
-           'http://www.shieldui.com/shared/components/latest/css/shieldui-all.min.css'
-           'http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css'
            %}
-        		<link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+        		<link rel="stylesheet" href="{{ asset_url }}" />
     		{% endstylesheets %}
     	 {% endblock %}
         	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
