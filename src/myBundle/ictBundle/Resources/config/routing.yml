@@ -1,11 +1,10 @@
 welcome:
     path:     /
-    defaults: { _controller: "myBundleictBundle:Welcome:welcome" }
+    defaults: { _controller: "myBundleictBundle:welcome:welcome" }
     
 hello:
     path:     /hello
     defaults: { _controller: "myBundleictBundle:Content:hello" }
-
     
 career_main:
     path:     /career_main
