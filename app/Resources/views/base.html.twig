@@ -8,6 +8,8 @@
 		<link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('css/local.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('http://www.shieldui.com/shared/components/latest/css/shieldui-all.min.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css') }}" rel="stylesheet" type="text/css" />
     	 {% endblock %}
         	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -44,14 +46,11 @@
     </div>
 
         {% block javascripts %}
-        	{% javascripts
-    			'@myBundleictBundle/Resources/views/Default/js/jquery-1.10.2.min.js'
-    			'@myBundleictBundle/Resources/views/Default/bootstrap/js/bootstrap.min.js'
-    			'http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js'
-    			'http://www.prepbootstrap.com/Content/js/gridData.js'    			
-			%}
-    			<script type="text/javascript" src="{{ asset_url }}"></script>
-			{% endjavascripts %}
+          <script src="js/jquery-1.10.2.min.js"></script>
+          <script src="bootstrap/js/bootstrap.min.js"></script>
+          <script src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+          <script src="http://www.prepbootstrap.com/Content/js/gridData.js"></script>
+
         {% endblock %}
     </body>
 </html>
