@@ -1,10 +1,10 @@
 parameters:
     database_driver:   pdo_mysql
-    database_host:     ec2-54-204-31-13.compute-1.amazonaws.com
-    database_port:     5432
-    database_name:     da3v7s01hiaill
-    database_user:     thepuufhlxlnip
-    database_password: pm_O_tcQrPN9M67Nq_A2cXfIJH
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     symfony
+    database_user:     root
+    database_password: ~
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 

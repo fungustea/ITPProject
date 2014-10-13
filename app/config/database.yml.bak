@@ -1,0 +1,13 @@
+parameters:
+    database_driver: pdo_pgsql
+    database_host: ec2-54-204-31-13.compute-1.amazonaws.com
+    database_port: 5432
+    database_name: da3v7s01hiaill
+    database_user: thepuufhlxlnip
+    database_password: pm_O_tcQrPN9M67Nq_A2cXfIJH
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: ThisTokenIsNotSoSecretChangeIt
