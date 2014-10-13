@@ -27,6 +27,9 @@ class ContentController extends Controller
 // // 			if ($animal->getSomeProperty() == $someValue)
 // // 				array_push($animals, $animal);
 // 		}	
+		if entities is not null
+		{
+			echo " db connect";
 		foreach($entities as $entity)
 		{
 // 			echo "test";
@@ -54,6 +57,10 @@ class ContentController extends Controller
 //  			else 
 //  			{echo"Link doesn't work;";}
 		}
+	  }
+	  else{
+	  	echo "cannt db";
+	  }
 		return $this->render('myBundleictBundle:Default:parent_career.html.twig', array(
 				'entities' => $new_entities,
 		));		
