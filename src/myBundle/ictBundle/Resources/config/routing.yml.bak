@@ -8,7 +8,7 @@ hello:
     
 career_main:
     path:     /career_main
-    defaults: { _controller: "myBundleictBundle:career:main" }
+    defaults: { _controller: "myBundleictBundle:Career:main" }
 
 activity_main:
     path:     /activity_main
