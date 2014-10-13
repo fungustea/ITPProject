@@ -30,6 +30,8 @@ class ContentController extends Controller
 		if (is_null(entities))
 		{
 				  	echo "cannt db";
+				  			return $this->render('myBundleictBundle:Default:parent_career.html.twig', array(
+				'entities' => null,
 		}
 		else
 		{
