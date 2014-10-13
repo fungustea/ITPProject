@@ -20,101 +20,33 @@ class activityController extends Controller
 	 */
 	public function mainAction()
 	{
-// 		$em = $this->getDoctrine()->getManager();
-// 		$em = pg_connect("host=localhost port=5432 dbname=ICT user=postgres password=admin");
+		$em = $this->getDoctrine()->getManager();
 	
-// 		$entities = $em->getRepository('myBundleictBundle:activity')->findAll();
-// 		$new_entities = array();
-// 		foreach($entities as $entity)
-// 		{
-// 			flush();
-// 			$fp = @fopen($entity->getURL(), "r");
+		$entities = $em->getRepository('myBundleictBundle:activity')->findAll();
+		$new_entities = array();
+		foreach($entities as $entity)
+		{
+			flush();
+			$fp = @fopen($entity->getURL(), "r");
 				
-// 			if ($fp !== false)
-// 			{
-// 				array_push($new_entities, $entity);
-// 				// 				echo "Link works";
-// 			}
-// 			else
-// 			{
-// 				$entity->setURL("invalid link");
-// 				array_push($new_entities, $entity);
-// 				// 				echo"Link doesn't work";
-// 			}
-// 			@fclose($fp);
-// 		}		
+			if ($fp !== false)
+			{
+				array_push($new_entities, $entity);
+				// 				echo "Link works";
+			}
+			else
+			{
+				$entity->setURL("invalid link");
+				array_push($new_entities, $entity);
+				// 				echo"Link doesn't work";
+			}
+			@fclose($fp);
+		}		
 		
 		
-// 		return $this->render('myBundleictBundle:Default:parent_act.html.twig', array(
-// 				'entities' => $new_entities,
-// 		));
-
-$config = new \Doctrine\DBAL\Configuration();
-//..
-$connectionParams = array(
-		'dbname' => 'ICT',
-		'user' => 'postgres',
-		'password' => 'admin',
-		'host' => 'localhost',
-		'driver' => 'pdo_pgsql',
-);
-$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
-$conn->beginTransaction();
-$stmt = $conn->prepare('SELECT * FROM activity');
-$stmt->execute();
-$new_entities = array();
-		while($entity = $stmt->fetch())
-				{
-					array_push($new_entities, $entity);
-// 					flush();
-// 					$fp = @fopen($entity->getURL(), "r");
-
-// 					if ($fp !== false)
-// 							{
-// 								array_push($new_entities, $entity);
-// 								// 				echo "Link works";
-// 							}
-// 					else
-// 							{
-// 								$entity->setURL("invalid link");
-// 								array_push($new_entities, $entity);
-// 								// 				echo"Link doesn't work";
-// 							}
-// 					@fclose($fp);
-				}
-// $i=0;
-// while ($row = $stmt->fetch()) {
-// 	$i++;
-// }
-// echo '<h1>DBAL</h1>';
-// echo "<strong>{$i} </strong>";
-return $this->render('myBundleictBundle:Default:parent_act.html.twig', array(
-		'entities' => $new_entities,));
-// $result = pg_query($conn, "SELECT * FROM activity");
-// 		$new_entities = array();
-// 		foreach($result as $entity)
-// 			{
-// 				flush();
-// 				$fp = @fopen($entity->getURL(), "r");
-
-// 				if ($fp !== false)
-// 					{
-// 						array_push($new_entities, $entity);
-// 						// 				echo "Link works";
-// 					}
-// 				else
-// 					{
-// 						$entity->setURL("invalid link");
-// 						array_push($new_entities, $entity);
-// 						// 				echo"Link doesn't work";
-// 					}
-// 				@fclose($fp);
-// 			}
-
-
-// 		return $this->render('myBundleictBundle:Default:parent_act.html.twig', array(
-// 				'entities' => $new_entities,
-// 		));
+		return $this->render('myBundleictBundle:Default:parent_act.html.twig', array(
+				'entities' => $new_entities,
+		));
 	}
     /**
      * Lists all activity entities.
