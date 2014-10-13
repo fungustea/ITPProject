@@ -1,0 +1,6 @@
+development:
+  adapter: postgresql
+  host: ec2-54-204-31-13.compute-1.amazonaws.com
+  username: thepuufhlxlnip
+  database: da3v7s01hiaill    
+  password: pm_O_tcQrPN9M67Nq_A2cXfIJH  
