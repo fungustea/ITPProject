@@ -9,7 +9,7 @@
                         <div class="panel-heading">{{ entity.groupname }}</div>
                         <div class="panel-body">
                           <b>Jobs:</b>&nbsp; {{ entity.jobs }}
-                      <BR><b>Skill&Interests:</b>&nbsp; {{ entity.skillInterests }}
+                      <BR><b>Skill&Interests:</b>&nbsp; {{ entity.skill_interests }}
                       <BR><b>profile:</b>&nbsp;<a href="{{ entity.profile }}">More opinion</a>
                       <BR><b><a href="{{ path('career_count', { 'id': entity.id }) }}">Click for like this topic: </a></b>There are {{ entity.popular }} people like this.
                         </div>
@@ -24,7 +24,6 @@
                 </div>
             </div>
         </div>
-    </div>
 {% endblock %}
 
 

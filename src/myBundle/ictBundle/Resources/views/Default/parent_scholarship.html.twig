@@ -6,10 +6,10 @@
                     <h1>SCHOLARSHIP</h1>
                      {% for entity in entities %}
                     <div class="panel panel-default">
-                        <div class="panel-heading">{{ entity.schoName }}</div>
+                        <div class="panel-heading">{{ entity.scho_name }}</div>
                         <div class="panel-body">
-                          <b>Detail:</b>&nbsp; {{ entity.schoDetail }}
-                      <BR><b>Closing date:</b>&nbsp; {{ entity.closingDate }}
+                          <b>Detail:</b>&nbsp; {{ entity.scho_detail }}
+                      <BR><b>Closing date:</b>&nbsp; {{ entity.closing_date }}
                       <BR><b>State:</b>&nbsp; {{ entity.state }}
                       <BR><b>CONTACT:</b>&nbsp; {{ entity.contact }}
                       <BR><b><a href="{{ path('scholarship_count', { 'id': entity.id }) }}">Click for like this topic: </a></b>There are {{ entity.popular }} people like this.

@@ -41,58 +41,108 @@ class careerController extends Controller
  * Lists all career entities.
  *
  */
-	public function mainAction()
+public function mainAction()
+{
+	
+// 	$em = $this->getDoctrine()->getManager();
+// 	$query = $em->createQuery(
+// 			'SELECT c FROM myBundleictBundle:career c ORDER BY c.popular DESC'
+// 	);
+
+// 	$entities = $query->getResult();
+// 	$new_entities = array();
+// 	foreach($entities as $entity)
+	$config = new \Doctrine\DBAL\Configuration();
+	//..
+	 	    	$connectionParams = array(
+	 	    			'dbname' => 'da3v7s01hiaill',
+	 	    			'user' => 'thepuufhlxlnip',
+	 	    			'password' => 'pm_O_tcQrPN9M67Nq_A2cXfIJH',
+	 	    			'host' => 'ec2-54-204-31-13.compute-1.amazonaws.com',
+	 	    			'driver' => 'pdo_pgsql',
+	 	    	);	
+
+	$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+	$conn->beginTransaction();
+	$stmt = $conn->prepare('SELECT * FROM career order by popular desc');
+	$stmt->execute();
+	$new_entities = array();
+	while($entity = $stmt->fetch())	
 	{
-		$em = $this->getDoctrine()->getManager();
-		$query = $em->createQuery(
-				'SELECT c FROM myBundleictBundle:career c ORDER BY c.popular DESC'
-		);
-		
-		$entities = $query->getResult();
-// 		$entities = $em->getRepository('myBundleictBundle:career')->findAll();
-// 		$dm = $this->get('doctrine.odm.mongodb.document_manager');
-// 		$animalLoggableCursors = $dm->getRepository('MyBundle:Animal')->findBy(array("prop" => "1"));
-		
-		$new_entities = array();
-// 		while ($entity = $entities->fetch()) {
-// 			if ($result = checkLink($entity->getUrl()))
-// 			{echo "Link works";} 
-// 			else 
-// 			{echo"Link doesn't work;";}
-// // 			if ($animal->getSomeProperty() == $someValue)
-// // 				array_push($animals, $animal);
-// 		}	
-		foreach($entities as $entity)
-		{
-// 			echo "test";
-// 			echo "----->";
-// 			echo $entity->getURL();
-// // 			echo count($article->getComments());
-// 			echo "<-----";
-			flush();
-			$fp = @fopen($entity->getURL(), "r");
+// 		echo "<-----";
+		flush();
+		$fp = @fopen($entity['url'], "r");
 			
-			if ($fp !== false)
-			{  
-				array_push($new_entities, $entity);
-// 				echo "Link works";          
-			}
-			else
-			{   
-				$entity->setURL("invalid link");
-				array_push($new_entities, $entity);
-// 				echo"Link doesn't work";       
-			}
-			@fclose($fp);
-// 		 if (checkLink($entity->getURL()))
-// 			{echo "Link works";} 
-//  			else 
-//  			{echo"Link doesn't work;";}
+		if ($fp !== false)
+		{
+			array_push($new_entities, $entity);
+			// echo "Link works";
 		}
-		return $this->render('myBundleictBundle:Default:parent_career.html.twig', array(
-				'entities' => $new_entities,
-		));
+		else
+		{
+			$entity['url']="invalid link";
+			array_push($new_entities, $entity);
+			// echo"Link doesn't work";
+		}
+		@fclose($fp);
+
 	}
+	return $this->render('myBundleictBundle:Default:parent_career.html.twig', array(
+			'entities' => $new_entities,
+	));
+}
+// 	public function mainAction()
+// 	{
+// 		$em = $this->getDoctrine()->getManager();
+// 		$query = $em->createQuery(
+// 				'SELECT c FROM myBundleictBundle:career c ORDER BY c.popular DESC'
+// 		);
+		
+// 		$entities = $query->getResult();
+// // 		$entities = $em->getRepository('myBundleictBundle:career')->findAll();
+// // 		$dm = $this->get('doctrine.odm.mongodb.document_manager');
+// // 		$animalLoggableCursors = $dm->getRepository('MyBundle:Animal')->findBy(array("prop" => "1"));
+		
+// 		$new_entities = array();
+// // 		while ($entity = $entities->fetch()) {
+// // 			if ($result = checkLink($entity->getUrl()))
+// // 			{echo "Link works";} 
+// // 			else 
+// // 			{echo"Link doesn't work;";}
+// // // 			if ($animal->getSomeProperty() == $someValue)
+// // // 				array_push($animals, $animal);
+// // 		}	
+// 		foreach($entities as $entity)
+// 		{
+// // 			echo "test";
+// // 			echo "----->";
+// // 			echo $entity->getURL();
+// // // 			echo count($article->getComments());
+// // 			echo "<-----";
+// 			flush();
+// 			$fp = @fopen($entity->getURL(), "r");
+			
+// 			if ($fp !== false)
+// 			{  
+// 				array_push($new_entities, $entity);
+// // 				echo "Link works";          
+// 			}
+// 			else
+// 			{   
+// 				$entity->setURL("invalid link");
+// 				array_push($new_entities, $entity);
+// // 				echo"Link doesn't work";       
+// 			}
+// 			@fclose($fp);
+// // 		 if (checkLink($entity->getURL()))
+// // 			{echo "Link works";} 
+// //  			else 
+// //  			{echo"Link doesn't work;";}
+// 		}
+// 		return $this->render('myBundleictBundle:Default:parent_career.html.twig', array(
+// 				'entities' => $new_entities,
+// 		));
+// 	}
     /**
      * Lists all career entities.
      *
@@ -265,23 +315,71 @@ class careerController extends Controller
      */
     public function countAction(Request $request, $id)
     {
-    	$em = $this->getDoctrine()->getManager();
+//     	$em = $this->getDoctrine()->getManager();
     
-    	$entity = $em->getRepository('myBundleictBundle:career')->find($id);
+//     	$entity = $em->getRepository('myBundleictBundle:career')->find($id);
     
-    	if (!$entity) {
-    		throw $this->createNotFoundException('Unable to find career entity.');
-    	}
-    	$entity->setPopular(($entity->getPopular())+1);
-    	$em->flush();
-    	$query = $em->createQuery(
-    	    	'SELECT c FROM myBundleictBundle:career c ORDER BY c.popular DESC'
-    	);
+//     	if (!$entity) {
+//     		throw $this->createNotFoundException('Unable to find career entity.');
+//     	}
+//     	$entity->setPopular(($entity->getPopular())+1);
+//     	$em->flush();
+//     	$query = $em->createQuery(
+//     	    	'SELECT c FROM myBundleictBundle:career c ORDER BY c.popular DESC'
+//     	);
     	    	
-    	$entities = $query->getResult();    	    		
-		return $this->render('myBundleictBundle:Default:parent_career.html.twig', array(
-				'entities' => $entities,
-		));
+//     	$entities = $query->getResult();    	    		
+// 		return $this->render('myBundleictBundle:Default:parent_career.html.twig', array(
+// 				'entities' => $entities,
+// 		));
+    	$config = new \Doctrine\DBAL\Configuration();
+    	//..
+    	 	    	$connectionParams = array(
+    	 	    			'dbname' => 'da3v7s01hiaill',
+    	 	    			'user' => 'thepuufhlxlnip',
+    	 	    			'password' => 'pm_O_tcQrPN9M67Nq_A2cXfIJH',
+    	 	    			'host' => 'ec2-54-204-31-13.compute-1.amazonaws.com',
+    	 	    			'driver' => 'pdo_pgsql',
+    	 	    	);
+
+    	$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+    	$conn->beginTransaction();
+    	$stmt = $conn->prepare("SELECT * FROM career where id=?");
+    	$stmt->execute(array($id));
+    	$new_entities = array();
+    	$pop = 0;
+    	while($entity = $stmt->fetch())
+    	{
+    		$pop = $entity['popular']+1;
+    	}
+    	$stmt = $conn->update('career', array('popular' => $pop), array('id' => $id));
+    	$conn->commit();
+    	$stmt = $conn->prepare('SELECT * FROM career order by popular desc');
+    	$stmt->execute();
+    	$new_entities = array();
+    	while($entity = $stmt->fetch())
+    	{
+    		// 	    		array_push($new_entities, $entity);
+    		flush();
+    		//     			$fp = @fopen($entity->getURL(), "r");
+    		$fp = @fopen($entity['url'], "r");
+    		if ($fp !== false)
+    		{
+    			array_push($new_entities, $entity);
+    			// echo "Link works";
+    		}
+    		else
+    		{
+    			//     				$entity->setURL("invalid link");
+    			$entity['url']="invalid link";
+    			array_push($new_entities, $entity);
+    			// 	echo"Link doesn't work";
+    		}
+    		@fclose($fp);
+    	}
+	return $this->render('myBundleictBundle:Default:parent_career.html.twig', array(
+			'entities' => $new_entities,
+	));
     }
     /**
      * Deletes a career entity.

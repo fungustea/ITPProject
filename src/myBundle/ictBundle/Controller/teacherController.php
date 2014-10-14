@@ -20,28 +20,66 @@ class teacherController extends Controller
 	 */
 	public function mainAction()
 	{
-		$em = $this->getDoctrine()->getManager();
+// 		$em = $this->getDoctrine()->getManager();
 	
-		$entities = $em->getRepository('myBundleictBundle:teacher')->findAll();
-		$new_entities = array();
-		foreach($entities as $entity)
-		{
-			flush();
-			$fp = @fopen($entity->getURL(), "r");
+// 		$entities = $em->getRepository('myBundleictBundle:teacher')->findAll();
+// 		$new_entities = array();
+// 		foreach($entities as $entity)
+// 		{
+// 			flush();
+// 			$fp = @fopen($entity->getURL(), "r");
 		
-			if ($fp !== false)
+// 			if ($fp !== false)
+// 			{
+// 				array_push($new_entities, $entity);
+// 				// 				echo "Link works";
+// 			}
+// 			else
+// 			{
+// 				$entity->setURL("invalid link");
+// 				array_push($new_entities, $entity);
+// 				// 				echo"Link doesn't work";
+// 			}
+// 			@fclose($fp);
+// 		}
+// 		return $this->render('myBundleictBundle:Default:teacher_skill.html.twig', array(
+// 				'entities' => $new_entities,
+// 		));
+		$config = new \Doctrine\DBAL\Configuration();
+		//..
+ 	    	$connectionParams = array(
+ 	    			'dbname' => 'da3v7s01hiaill',
+ 	    			'user' => 'thepuufhlxlnip',
+ 	    			'password' => 'pm_O_tcQrPN9M67Nq_A2cXfIJH',
+ 	    			'host' => 'ec2-54-204-31-13.compute-1.amazonaws.com',
+ 	    			'driver' => 'pdo_pgsql',
+ 	    	);
+
+			$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+			$conn->beginTransaction();
+			$stmt = $conn->prepare('SELECT * FROM teacher order by popular desc');
+			$stmt->execute();
+			$new_entities = array();
+			while($entity = $stmt->fetch())
 			{
-				array_push($new_entities, $entity);
-				// 				echo "Link works";
+				// 		echo "<-----";
+				flush();
+				$fp = @fopen($entity['url'], "r");
+			
+				if ($fp !== false)
+				{
+					array_push($new_entities, $entity);
+					// echo "Link works";
+				}
+				else
+				{
+					$entity['url']="invalid link";
+					array_push($new_entities, $entity);
+					// echo"Link doesn't work";
+				}
+				@fclose($fp);
+			
 			}
-			else
-			{
-				$entity->setURL("invalid link");
-				array_push($new_entities, $entity);
-				// 				echo"Link doesn't work";
-			}
-			@fclose($fp);
-		}
 		return $this->render('myBundleictBundle:Default:teacher_skill.html.twig', array(
 				'entities' => $new_entities,
 		));
@@ -218,23 +256,71 @@ class teacherController extends Controller
      */
     public function countAction(Request $request, $id)
     {
-    	$em = $this->getDoctrine()->getManager();
+//     	$em = $this->getDoctrine()->getManager();
     
-    	$entity = $em->getRepository('myBundleictBundle:teacher')->find($id);
+//     	$entity = $em->getRepository('myBundleictBundle:teacher')->find($id);
     
-    	if (!$entity) {
-    		throw $this->createNotFoundException('Unable to find teacher entity.');
+//     	if (!$entity) {
+//     		throw $this->createNotFoundException('Unable to find teacher entity.');
+//     	}
+//     	$entity->setPopular(($entity->getPopular())+1);
+//     	$em->flush();
+//     	$query = $em->createQuery(
+//     			'SELECT c FROM myBundleictBundle:teacher c ORDER BY c.popular DESC'
+//     	);
+    
+//     	$entities = $query->getResult();
+//     	return $this->render('myBundleictBundle:Default:teacher_skill.html.twig', array(
+//     			'entities' => $entities,
+//     	));
+    	$config = new \Doctrine\DBAL\Configuration();
+    	//..
+    	 	    	$connectionParams = array(
+    	 	    			'dbname' => 'da3v7s01hiaill',
+    	 	    			'user' => 'thepuufhlxlnip',
+    	 	    			'password' => 'pm_O_tcQrPN9M67Nq_A2cXfIJH',
+    	 	    			'host' => 'ec2-54-204-31-13.compute-1.amazonaws.com',
+    	 	    			'driver' => 'pdo_pgsql',
+    	 	    	);
+
+    	$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+    	$conn->beginTransaction();
+    	$stmt = $conn->prepare("SELECT * FROM teacher where id=?");
+    	$stmt->execute(array($id));
+    	$new_entities = array();
+    	$pop = 0;
+    	while($entity = $stmt->fetch())
+    	{
+    		$pop = $entity['popular']+1;
     	}
-    	$entity->setPopular(($entity->getPopular())+1);
-    	$em->flush();
-    	$query = $em->createQuery(
-    			'SELECT c FROM myBundleictBundle:teacher c ORDER BY c.popular DESC'
-    	);
-    
-    	$entities = $query->getResult();
-    	return $this->render('myBundleictBundle:Default:teacher_skill.html.twig', array(
-    			'entities' => $entities,
-    	));
+    	$stmt = $conn->update('teacher', array('popular' => $pop), array('id' => $id));
+    	$conn->commit();
+    	$stmt = $conn->prepare('SELECT * FROM teacher order by popular desc');
+    	$stmt->execute();
+    	$new_entities = array();
+    	while($entity = $stmt->fetch())
+    	{
+    		// 	    		array_push($new_entities, $entity);
+    		flush();
+    		//     			$fp = @fopen($entity->getURL(), "r");
+    		$fp = @fopen($entity['url'], "r");
+    		if ($fp !== false)
+    		{
+    			array_push($new_entities, $entity);
+    			// echo "Link works";
+    		}
+    		else
+    		{
+    			//     				$entity->setURL("invalid link");
+    			$entity['url']="invalid link";
+    			array_push($new_entities, $entity);
+    			// 	echo"Link doesn't work";
+    		}
+    		@fclose($fp);
+    	}
+		return $this->render('myBundleictBundle:Default:teacher_skill.html.twig', array(
+				'entities' => $new_entities,
+		));
     }    
     /**
      * Deletes a teacher entity.

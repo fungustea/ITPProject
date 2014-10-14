@@ -280,14 +280,20 @@ class activityController extends Controller
 //     	));
     	$config = new \Doctrine\DBAL\Configuration();
     	//..
-    	 	    	$connectionParams = array(
-    	 	    			'dbname' => 'da3v7s01hiaill',
-    	 	    			'user' => 'thepuufhlxlnip',
-    	 	    			'password' => 'pm_O_tcQrPN9M67Nq_A2cXfIJH',
-    	 	    			'host' => 'ec2-54-204-31-13.compute-1.amazonaws.com',
-    	 	    			'driver' => 'pdo_pgsql',
-    	 	    	);
-
+    	// 	    	$connectionParams = array(
+    	// 	    			'dbname' => 'da3v7s01hiaill',
+    	// 	    			'user' => 'thepuufhlxlnip',
+    	// 	    			'password' => 'pm_O_tcQrPN9M67Nq_A2cXfIJH',
+    	// 	    			'host' => 'ec2-54-204-31-13.compute-1.amazonaws.com',
+    	// 	    			'driver' => 'pdo_pgsql',
+    	// 	    	);
+    	$connectionParams = array(
+    			'dbname' => 'ICT',
+    			'user' => 'postgres',
+    			'password' => 'admin',
+    			'host' => 'localhost',
+    			'driver' => 'pdo_pgsql',
+    	);
     	$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
     	$conn->beginTransaction();
     	$stmt = $conn->prepare("SELECT * FROM activity where id=?");
@@ -322,7 +328,6 @@ class activityController extends Controller
     		$fp = @fopen($entity['url'], "r");
     		if ($fp !== false)
     		{
-    			$entity[10] = 111;
     			array_push($new_entities, $entity);
     			// echo "Link works";
     		}
