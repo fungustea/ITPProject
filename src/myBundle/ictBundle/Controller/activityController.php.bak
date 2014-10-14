@@ -52,10 +52,10 @@ class activityController extends Controller
 $config = new \Doctrine\DBAL\Configuration();
 //..
 $connectionParams = array(
-		'dbname' => 'ICT',
-		'user' => 'postgres',
-		'password' => 'admin',
-		'host' => 'localhost',
+		'dbname' => 'da3v7s01hiaill',
+		'user' => 'thepuufhlxlnip',
+		'password' => 'pm_O_tcQrPN9M67Nq_A2cXfIJH',
+		'host' => 'ec2-54-204-31-13.compute-1.amazonaws.com',
 		'driver' => 'pdo_pgsql',
 );
 $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);

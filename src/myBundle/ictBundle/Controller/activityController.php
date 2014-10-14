@@ -18,10 +18,50 @@ class activityController extends Controller
 	 * Lists all activity entities.
 	 *
 	 */
-	public function mainAction()
-	{
+	    public function mainAction()
+	    {
+	
+	    	$config = new \Doctrine\DBAL\Configuration();
+	    	//..
+ 	    	$connectionParams = array(
+ 	    			'dbname' => 'da3v7s01hiaill',
+ 	    			'user' => 'thepuufhlxlnip',
+ 	    			'password' => 'pm_O_tcQrPN9M67Nq_A2cXfIJH',
+ 	    			'host' => 'ec2-54-204-31-13.compute-1.amazonaws.com',
+ 	    			'driver' => 'pdo_pgsql',
+ 	    	);
+
+	    	$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+	    	$conn->beginTransaction();
+	    	$stmt = $conn->prepare('SELECT * FROM activity order by popular desc');
+	    	$stmt->execute();
+	    	$new_entities = array();
+	    	while($entity = $stmt->fetch())
+	    	{
+// 	    		array_push($new_entities, $entity);
+    			flush();
+//     			$fp = @fopen($entity->getURL(), "r");
+    			$fp = @fopen($entity['url'], "r");
+				if ($fp !== false)
+    			{
+    				array_push($new_entities, $entity);
+    				// echo "Link works";
+    			}
+    			else
+    			{
+//     				$entity->setURL("invalid link");
+    				$entity['url']="invalid link";
+    				array_push($new_entities, $entity);
+    				// 	echo"Link doesn't work";
+    			}
+    			@fclose($fp);
+	    	}
+	    	return $this->render('myBundleictBundle:Default:parent_act.html.twig', array(
+	    			'entities' => $new_entities,));
+	    }	
+// 	public function mainAction()
+// 	{
 // 		$em = $this->getDoctrine()->getManager();
-// 		$em = pg_connect("host=localhost port=5432 dbname=ICT user=postgres password=admin");
 	
 // 		$entities = $em->getRepository('myBundleictBundle:activity')->findAll();
 // 		$new_entities = array();
@@ -48,74 +88,7 @@ class activityController extends Controller
 // 		return $this->render('myBundleictBundle:Default:parent_act.html.twig', array(
 // 				'entities' => $new_entities,
 // 		));
-
-$config = new \Doctrine\DBAL\Configuration();
-//..
-$connectionParams = array(
-		'dbname' => 'da3v7s01hiaill',
-		'user' => 'thepuufhlxlnip',
-		'password' => 'pm_O_tcQrPN9M67Nq_A2cXfIJH',
-		'host' => 'ec2-54-204-31-13.compute-1.amazonaws.com',
-		'driver' => 'pdo_pgsql',
-);
-$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
-$conn->beginTransaction();
-$stmt = $conn->prepare('SELECT * FROM activity');
-$stmt->execute();
-$new_entities = array();
-		while($entity = $stmt->fetch())
-				{
-					array_push($new_entities, $entity);
-// 					flush();
-// 					$fp = @fopen($entity->getURL(), "r");
-
-// 					if ($fp !== false)
-// 							{
-// 								array_push($new_entities, $entity);
-// 								// 				echo "Link works";
-// 							}
-// 					else
-// 							{
-// 								$entity->setURL("invalid link");
-// 								array_push($new_entities, $entity);
-// 								// 				echo"Link doesn't work";
-// 							}
-// 					@fclose($fp);
-				}
-// $i=0;
-// while ($row = $stmt->fetch()) {
-// 	$i++;
-// }
-// echo '<h1>DBAL</h1>';
-// echo "<strong>{$i} </strong>";
-return $this->render('myBundleictBundle:Default:parent_act.html.twig', array(
-		'entities' => $new_entities,));
-// $result = pg_query($conn, "SELECT * FROM activity");
-// 		$new_entities = array();
-// 		foreach($result as $entity)
-// 			{
-// 				flush();
-// 				$fp = @fopen($entity->getURL(), "r");
-
-// 				if ($fp !== false)
-// 					{
-// 						array_push($new_entities, $entity);
-// 						// 				echo "Link works";
-// 					}
-// 				else
-// 					{
-// 						$entity->setURL("invalid link");
-// 						array_push($new_entities, $entity);
-// 						// 				echo"Link doesn't work";
-// 					}
-// 				@fclose($fp);
-// 			}
-
-
-// 		return $this->render('myBundleictBundle:Default:parent_act.html.twig', array(
-// 				'entities' => $new_entities,
-// 		));
-	}
+// 	}
     /**
      * Lists all activity entities.
      *
@@ -288,23 +261,82 @@ return $this->render('myBundleictBundle:Default:parent_act.html.twig', array(
      */
     public function countAction(Request $request, $id)
     {
-    	$em = $this->getDoctrine()->getManager();
+//     	$em = $this->getDoctrine()->getManager();
     
-    	$entity = $em->getRepository('myBundleictBundle:activity')->find($id);
+//     	$entity = $em->getRepository('myBundleictBundle:activity')->find($id);
     
-    	if (!$entity) {
-    		throw $this->createNotFoundException('Unable to find activity entity.');
+//     	if (!$entity) {
+//     		throw $this->createNotFoundException('Unable to find activity entity.');
+//     	}
+//     	$entity->setPopular(($entity->getPopular())+1);
+//     	$em->flush();
+//     	$query = $em->createQuery(
+//     			'SELECT c FROM myBundleictBundle:activity c ORDER BY c.popular DESC'
+//     	);
+    
+//     	$entities = $query->getResult();
+//     	return $this->render('myBundleictBundle:Default:parent_act.html.twig', array(
+//     			'entities' => $entities,
+//     	));
+    	$config = new \Doctrine\DBAL\Configuration();
+    	//..
+    	 	    	$connectionParams = array(
+    	 	    			'dbname' => 'da3v7s01hiaill',
+    	 	    			'user' => 'thepuufhlxlnip',
+    	 	    			'password' => 'pm_O_tcQrPN9M67Nq_A2cXfIJH',
+    	 	    			'host' => 'ec2-54-204-31-13.compute-1.amazonaws.com',
+    	 	    			'driver' => 'pdo_pgsql',
+    	 	    	);
+
+    	$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+    	$conn->beginTransaction();
+    	$stmt = $conn->prepare("SELECT * FROM activity where id=?");
+    	$stmt->execute(array($id));
+    	$new_entities = array();
+    	$pop = 0;
+    	while($entity = $stmt->fetch())
+    	{   		
+    		$pop = $entity['popular']+1;
     	}
-    	$entity->setPopular(($entity->getPopular())+1);
-    	$em->flush();
-    	$query = $em->createQuery(
-    			'SELECT c FROM myBundleictBundle:activity c ORDER BY c.popular DESC'
-    	);
-    
-    	$entities = $query->getResult();
+//     	$stmt = $conn->query($str);
+//     	$stmt->execute();
+//     	$new_entities = array();
+//     	$entity = $stmt->fetch();
+// //     	$count = $conn->executeUpdate('UPDATE activity SET popular = ? WHERE id = ?', array(0, 1));
+//     	$stmt = $conn->executeUpdate("Update activity set popular = ? where id=?", array($pop, $id));
+    	$stmt = $conn->update('activity', array('popular' => $pop), array('id' => $id));
+    	$conn->commit();
+    	// UPDATE user (username) VALUES (?) WHERE id = ? (jwage, 1)
+//     	$stmt = $conn->update( "activity", "popular", $pop);
+//     	$stmt->execute();
+// //     	$stmt->execute(array($popular,$id));
+// //     	step select
+    	$stmt = $conn->prepare('SELECT * FROM activity order by popular desc');
+    	$stmt->execute();
+    	$new_entities = array();
+    	while($entity = $stmt->fetch())
+    	{
+    		// 	    		array_push($new_entities, $entity);
+    		flush();
+    		//     			$fp = @fopen($entity->getURL(), "r");
+    		$fp = @fopen($entity['url'], "r");
+    		if ($fp !== false)
+    		{
+    			$entity[10] = 111;
+    			array_push($new_entities, $entity);
+    			// echo "Link works";
+    		}
+    		else
+    		{
+    			//     				$entity->setURL("invalid link");
+    			$entity['url']="invalid link";
+    			array_push($new_entities, $entity);
+    			// 	echo"Link doesn't work";
+    		}
+    		@fclose($fp);
+    	}
     	return $this->render('myBundleictBundle:Default:parent_act.html.twig', array(
-    			'entities' => $entities,
-    	));
+    			'entities' => $new_entities,));
     }
     /**
      * Deletes a activity entity.
@@ -346,4 +378,46 @@ return $this->render('myBundleictBundle:Default:parent_act.html.twig', array(
             ->getForm()
         ;
     }
+    
+    
+    //for test
+    //     public function mainAction()
+    //     {
+    
+    //     	$config = new \Doctrine\DBAL\Configuration();
+    //     	//..
+    //     	$connectionParams = array(
+    //     			'dbname' => 'ICT',
+    //     			'user' => 'postgres',
+    		//     			'password' => 'admin',
+    		//     			'host' => 'localhost',
+    		//     			'driver' => 'pdo_pgsql',
+    //     	);
+    //     	$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+    //     	$conn->beginTransaction();
+    //     	$stmt = $conn->prepare('SELECT * FROM activity');
+    //     	$stmt->execute();
+    //     	$new_entities = array();
+    //     	while($entity = $stmt->fetch())
+    	//     	{
+    	//     		array_push($new_entities, $entity);
+    	//     		// 					flush();
+    	//     		// 					$fp = @fopen($entity->getURL(), "r");
+    
+    	//     		// 					if ($fp !== false)
+    		//     			// 							{
+    		//     			// 								array_push($new_entities, $entity);
+    		//     			// 								// 				echo "Link works";
+    		//     			// 							}
+    		//     		// 					else
+    			//     			// 							{
+    			//     			// 								$entity->setURL("invalid link");
+    			//     			// 								array_push($new_entities, $entity);
+    			//     			// 								// 				echo"Link doesn't work";
+    			//     			// 							}
+    			//     		// 					@fclose($fp);
+    			//     	}
+    //     	return $this->render('myBundleictBundle:Default:parent_act.html.twig', array(
+    //     			'entities' => $new_entities,));
+    //     } 
 }
